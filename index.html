@@ -1,0 +1,189 @@
+<html>
+<head>
+	<title>Diferencial Cambiario</title>
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+</head>
+<body>
+<div class="d-none d-sm-block"><hr></div>
+
+	<!--	SECCION N°7: Consola de registro de eventos	-->
+	<div class="card">
+		<div class="card-body">
+			<div class="col-10 cabecera d-none d-md-block text-center h3 font-weight-bold">
+			TASA DOLAR BCV, DOLAR USDT Y EURO
+			</div>
+			<div class="cuerpo" id="consola">
+
+				<table class="table table-hover table-condensed table-bordered" id="dollar">
+					<thead style="background-color: #dc3545;color: white; font-weight: bold;">
+						<tr>
+							<th>moneda</th>
+							<th>fuente</th>
+							<th>nombre</th>
+							<th>promedio</th>
+							<th>fechaActualizacion</th>							
+						</tr>
+					</thead>
+					<tfoot style="background-color: #ccc;color: white; font-weight: bold;">		
+						<tr>
+							<th>moneda</th>
+							<th>fuente</th>
+							<th>nombre</th>
+							<th>promedio</th>
+							<th>fechaActualizacion</th>							
+						</tr>
+					</tfoot>
+					<tbody style="background-color: white;color: gray; font-weight: bold;" id="foot">
+					</tbody>
+				</table>				
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="col-10 cabecera d-none d-md-block text-center h3 font-weight-bold">
+			HISTORICO DE TASA DOLAR BCV, DOLAR USDT Y EURO
+			</div>
+			<div class="cuerpo" id="historico">
+				<table class="table table-hover table-condensed table-bordered" id="history">
+					<thead style="background-color: #dc3545;color: white; font-weight: bold;">
+						<tr>
+							<th>fuente</th>
+							<th>promedio</th>
+							<th>fecha</th>
+							<th>moneda</th>								
+						</tr>
+					</thead>
+					<tfoot style="background-color: #ccc;color: white; font-weight: bold;">		
+						<tr>
+							<th>fuente</th>
+							<th>promedio</th>
+							<th>fecha</th>	
+							<th>moneda</th>							
+						</tr>
+					</tfoot>
+					<tbody style="background-color: white;color: gray; font-weight: bold;" id="foot">
+					</tbody>
+				</table>				
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+
+	$("#dollar").DataTable( {
+		"pageLength" : 5,   // number of rows to display
+		"order": [
+ 			[ 0, "asc" ],
+ 			[ 1, "desc" ],
+ 			[ 3, "desc" ]
+ 			],
+		"columns": [
+			{ data: "moneda" },
+			{ data: "fuente" },
+			{ data: "nombre" },
+			{ data: "promedio" },
+			{ data: "fechaActualizacion" }
+ 			]
+		});
+	$("#history").DataTable( {
+		"pageLength" : 10,   // number of rows to display
+		"order": [
+ 			[ 2, "desc" ],
+ 			[ 0, "desc" ],
+  			],
+		"columns": [
+			{ data: "fuente" },
+			{ data: "promedio" },
+			{ data: "fecha" },
+			{ data: "moneda", defaultContent: "-"  }
+ 			]
+		});
+	async function leerDollar(url) {
+	    try {
+		// 1. Hacemos la petición
+		const respuesta = await fetch(url);
+		// 2. Verificamos que la petición sea exitosa
+		if (!respuesta.ok) {
+		    throw new Error(`Error en la petición: ${respuesta.status}`);
+		}
+		// 3. Leemos y procesamos la información (ej. JSON)
+		const res = await respuesta.json();
+		return res; 
+		
+	    } catch (error) {
+		console.error('Hubo un problema con la petición:', error);
+	    }
+	}
+	
+	let dollarURL = "https://ve.dolarapi.com/v1/dolares/oficial";
+	const dolar = leerDollar(dollarURL);
+		dolar.then((resultado) => {
+	// 2. Agregas la fila y dibujas la tabla una vez que tienes los datos
+			$("#dollar").DataTable().row.add(resultado).draw();
+			}).catch((error) => {
+	// Escuchas si la promesa falla
+			console.error("Hubo un error al obtener los datos:", error);
+			})	
+	let paraleloURL = "https://ve.dolarapi.com/v1/dolares/paralelo";
+	const paralelo = leerDollar(paraleloURL);
+		paralelo.then((resultado) => {
+	// 2. Agregas la fila y dibujas la tabla una vez que tienes los datos
+			$("#dollar").DataTable().row.add(resultado).draw();
+			}).catch((error) => {
+	// Escuchas si la promesa falla
+			console.error("Hubo un error al obtener los datos:", error);
+			})
+	let euroURL = "https://ve.dolarapi.com/v1/euros/oficial";
+	const euro = leerDollar(euroURL);
+		euro.then((resultado) => {
+	// 2. Agregas la fila y dibujas la tabla una vez que tienes los datos
+			$("#dollar").DataTable().row.add(resultado).draw();
+			}).catch((error) => {
+	// Escuchas si la promesa falla
+			console.error("Hubo un error al obtener los datos:", error);
+			})
+///////////////////////////////////////////////////////////////////////////////////////
+	let dollarHistoyURL = "https://ve.dolarapi.com/v1/historicos/dolares";
+	const dolarhistory = leerDollar(dollarHistoyURL);
+		dolarhistory.then((resultado) => {
+	// 2. Agregas la fila y dibujas la tabla una vez que tienes los datos
+			$("#history").DataTable().rows.add(resultado).draw();
+			}).catch((error) => {
+	// Escuchas si la promesa falla
+			console.error("Hubo un error al obtener los datos:", error);
+		})	
+
+	let euroHistoryURL = "https://ve.dolarapi.com/v1/historicos/euros";
+	const eurohistory = leerDollar(euroHistoryURL);
+		eurohistory.then((resultado) => {
+	// 2. Agregas la fila y dibujas la tabla una vez que tienes los datos
+			$("#history").DataTable().rows.add(resultado).draw();
+			}).catch((error) => {
+	// Escuchas si la promesa falla
+			console.error("Hubo un error al obtener los datos:", error);
+		})
+
+
+});
+
+
+
+// Extraer una variable específica
+
+</script>
+
+</html>
