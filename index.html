@@ -25,9 +25,21 @@
 <!-- FILA 2: Panel de Conversión en Tiempo Real -->
 <!-- FILA 2: Sección de Conversión Multidivisa -->
 
-	<div class="bg-light p-4 rounded border m-auto">
-		<h5 class="mb-3 text-secondary text-center font-weight-bold">Calculadora de Conversión en Tiempo Real (VES)</h5>
-       
+<div class="bg-light p-4 rounded border m-auto">
+    <h5 class="mb-3 text-secondary text-center font-weight-bold">Calculadora de Conversión en Tiempo Real (VES)</h5>
+    
+    <!-- 1. Creamos una fila y le añadimos 'justify-content-center' para centrar todo su contenido -->
+    <div class="row justify-content-center">
+        
+        <!-- 2. Tu columna queda aquí dentro perfectamente alineada al medio -->
+        <div class="col-md-6 col-lg-4">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-info text-white font-weight-bold">Monto Bs (VES)</span>
+                </div>
+                <input type="number" class="form-control" id="bolivares" placeholder="1.00" value="1.00" step="0.001" min="0" readOnly>
+            </div>
+        </div>
 		<div class="row">
 		<!-- Bloque Dólares -->
 			<div class="col-md-4 border-right">
@@ -112,29 +124,7 @@
 	<div class="cuerpo" id="calculo">
 		<div class="row row-cols-1 row-cols-md-3 align-items-center m-auto mb-4">
 			<div class="col p-1">
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text">Bs/Dolar BCV</span>
-					</div>
-						<input type="text" class="form-control font-weight-bold text-primary" id="bcv" placeholder="0.00" value="1.00" readonly>
-					</div>
-				</div>
-				<div class="col p-1">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text">Bs/Dolar USDT</span>
-						</div>
-						<input type="text" class="form-control font-weight-bold text-danger" id="usdt" placeholder="0.00" value="1.00" readonly>
-					</div>
-				</div>
-				<div class="col p-1">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text">Bs/Euro</span>
-						</div>
-						<input type="text" class="form-control font-weight-bold text-success" id="euro" placeholder="0.00" value="1.00"readonly>
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</div>	
@@ -361,14 +351,14 @@ $(document).ready(function() {
 
 	// 2. Guardamos la tasa BCV si respondió con éxito
 		if (resBcv) {
-			$("#bcv").val(resBcv.promedio); console.log("ultima fecha:"+resBcv.fecha);
+			console.log("ultima fecha:"+resBcv.fecha);
 			window.tasasCargadas.bcv.promedio = parseFloat(resBcv.promedio).toFixed(4);
 			window.tasasCargadas.bcv.fecha = (resBcv.fecha);
 		}
 
         // 3. Guardamos la tasa Paralelo si respondió con éxito
 		if (resusdt) {
-			$("#usdt").val(resusdt.promedio);console.log("ultima fecha:"+resusdt.fecha);
+			console.log("ultima fecha:"+resusdt.fecha);
 			window.tasasCargadas.usdt.promedio = parseFloat(resusdt.promedio).toFixed(4);
 			window.tasasCargadas.usdt.fecha = (resusdt.fecha);
 		}

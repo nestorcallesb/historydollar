@@ -286,17 +286,20 @@
     // Desactivamos temporalmente para evitar bucles cruzados infinitos
 		$('#montobcv, #montousdt, #montoeuro').off('input.calculadora');
 
-		if (campoModificado !== "montobcv") 
-			$('#montobcv').val(window.calculo.montobcv > 0 ? window.calculo.montobcv : '');
-		if (campoModificado !== "montousdt") 
+		if (campoModificado === "montousdt") {
 			$('#montousdt').val(window.calculo.montousdt > 0 ? window.calculo.montousdt : '');
-		if (campoModificado !== "montoeuro") 
+			$("#bolivares").val((window.calculo.montousdt * tUsdt).toFixed(3));
+		}
+		if (campoModificado === "montoeuro") {
 			$('#montoeuro').val(window.calculo.montoeuro > 0 ? window.calculo.montoeuro : '');
+			$("#bolivares").val((window.calculo.montoeuro * tEuro).toFixed(3));
+		}
+		if (campoModificado === "montobcv") {
+			$('#montobcv').val(window.calculo.montobcv > 0 ? window.calculo.montobcv : '');
+			$("#bolivares").val((window.calculo.montobcv * tBcv).toFixed(3));
+		}
 
-	// Actualizar labels de texto con los Bs calculados de tu Excel
-		$("#bcv").val((window.calculo.montobcv * tBcv).toFixed(3));
-		$("#usdt").val((window.calculo.montousdt * tUsdt).toFixed(3));
-		$("#euro").val((window.calculo.montoeuro * tEuro).toFixed(3));
+
 		
 		console.table(window.calculo);
 		activarEscuchaInputs();
@@ -315,9 +318,6 @@
 
 	function resetCampoTasas() {
 		$('#montobcv').val("1.00");$('#montousdt').val("1.00");$('#montoeuro').val("1.00");
-		$("#bcv").val(window.tasasCargadas.bcv.promedio);
-		$("#usdt").val(window.tasasCargadas.usdt.promedio);
-		$("#euro").val(window.tasasCargadas.euro.promedio);
 	}
 	function calculoinicial(){
 		window.calculo.bsbcv= window.tasasCargadas.bcv.promedio;
