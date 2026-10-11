@@ -7,18 +7,139 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 
 	<!-- jQuery library -->
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-
+	<script src="./js/variables.js"></script>
+	<script type="text/javascript" src="./js/script.js"></script>
 </head>
 <body>
 <div class="d-none d-sm-block"><hr></div>
 
 	<!--	SECCION N°7: Consola de registro de eventos	-->
 	<div class="card">
+
+<!-- FILA 2: Panel de Conversión en Tiempo Real -->
+<!-- FILA 2: Sección de Conversión Multidivisa -->
+
+	<div class="bg-light p-4 rounded border m-auto">
+		<h5 class="mb-3 text-secondary text-center font-weight-bold">Calculadora de Conversión en Tiempo Real (VES)</h5>
+       
+		<div class="row">
+		<!-- Bloque Dólares -->
+			<div class="col-md-4 border-right">
+				<div class="input-group mb-2">
+					<div class="input-group-prepend">
+						<span class="input-group-text bg-primary text-white font-weight-bold">Monto USD ($)</span>
+					</div>
+					<input type="number" class="form-control" id="montobcv" placeholder="1.00" value="1.00" step="0.01" min="0" readOnly>
+				</div>
+
+				<p class="mb-1 text-muted small">
+					<span id="txtBCVUSDT">% de Diferencia: </span> 
+					<span class="font-weight-bold text-dark" id="resBCVUSDT">0.00 %</span>
+				</p>
+				<p class="mb-1 text-muted small">
+					<span id="txtBCVEURO">% de Diferencia: </span> 
+					<span class="font-weight-bold text-dark" id="resBCVEURO">0.00 %</span>
+				</p>
+				<p class="mb-1 text-muted small">
+					<span >Tasa: </span> 
+					<span class="font-weight-bold text-dark" id="tasaBCV"> </span>
+				</p>
+
+				<p class="mb-1 text-muted small">
+					<span >Fecha tasa: </span> 
+					<span class="font-weight-bold text-dark" id="fechaBCV"> </span>
+				</p>
+			</div>
+	<!-- Bloque Dólares USDT -->
+			<div class="col-md-4 border-right">
+				<div class="input-group mb-2">
+					<div class="input-group-prepend">
+						<span class="input-group-text bg-danger text-white font-weight-bold">Monto USDT ($)</span>
+					</div>
+					<input type="number" class="form-control" id="montousdt" placeholder="1.00" value="1.00" step="0.01" min="0" readOnly>
+				</div>
+				<p class="mb-1 text-muted small">
+					<span id="txtUSDTBCV">% de Diferencia: </span> 
+					<span class="font-weight-bold text-dark" id="resUSDTBCV">0.00 %</span>
+				</p>
+				<p class="mb-1 text-muted small">
+					<span id="txtUSDTEURO">% de Diferencia: </span> 
+					<span class="font-weight-bold text-dark" id="resUSDTEURO">0.00 %</span>
+				</p>
+				<p class="mb-1 text-muted small">
+					<span >Tasa: </span> 
+					<span class="font-weight-bold text-dark" id="tasaUSDT"> </span>
+				</p>
+				<p class="mb-1 text-muted small">
+					<span >Fecha tasa: </span> 
+					<span class="font-weight-bold text-dark" id="fechaUSDT"> </span>
+				</p>
+			</div>	
+	<!-- Bloque Euros -->
+			<div class="col-md-4 mt-3 mt-md-0">
+				<div class="input-group mb-2">
+					<div class="input-group-prepend">
+						<span class="input-group-text bg-success text-white font-weight-bold">Monto EURO (€)</span>
+					</div>
+					<input type="number" class="form-control" id="montoeuro" placeholder="1.00" value="1.00" step="0.01" min="0" readOnly>
+				</div>
+				<p class="mb-1 text-muted small">
+					<span id="txtEUROBCV">% de Diferencia: </span> 
+					<span class="font-weight-bold text-dark" id="resEUROBCV">0.00 %</span>
+				</p>
+				<p class="mb-1 text-muted small">
+					<span id="txtEUROUSDT">% de Diferencia: </span> 
+					<span class="font-weight-bold text-dark" id="resEUROUSDT">0.00 %</span>
+				<p class="mb-1 text-muted small">
+					<span >Tasa: </span> 
+					<span class="font-weight-bold text-dark" id="tasaEURO"> </span>
+				</p>
+				<p class="mb-1 text-muted small">
+					<span >Fecha tasa: </span> 
+					<span class="font-weight-bold text-dark" id="fechaEURO"> </span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="cuerpo" id="calculo">
+		<div class="row row-cols-1 row-cols-md-3 align-items-center m-auto mb-4">
+			<div class="col p-1">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Bs/Dolar BCV</span>
+					</div>
+						<input type="text" class="form-control font-weight-bold text-primary" id="bcv" placeholder="0.00" value="1.00" readonly>
+					</div>
+				</div>
+				<div class="col p-1">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Bs/Dolar USDT</span>
+						</div>
+						<input type="text" class="form-control font-weight-bold text-danger" id="usdt" placeholder="0.00" value="1.00" readonly>
+					</div>
+				</div>
+				<div class="col p-1">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Bs/Euro</span>
+						</div>
+						<input type="text" class="form-control font-weight-bold text-success" id="euro" placeholder="0.00" value="1.00"readonly>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+<!-- FIN DE LOS INPUTS-->
+	
 		<div class="card-body">
 			<div class="col-10 cabecera d-none d-md-block text-center h3 font-weight-bold">
 			TASA DOLAR BCV, DOLAR USDT Y EURO
@@ -83,8 +204,10 @@
 
 $(document).ready(function() {
 
-
 	$("#dollar").DataTable( {
+		"searching": false,
+		"lengthChange": false,
+		"paging": false,
 		"pageLength" : 5,   // number of rows to display
 		"order": [
  			[ 0, "asc" ],
@@ -98,7 +221,7 @@ $(document).ready(function() {
 			{ data: "promedio" },
 			{ data: "fechaActualizacion" }
  			]
-		});
+	});
 	$("#history").DataTable( {
 		"pageLength" : 10,   // number of rows to display
 		"order": [
@@ -111,78 +234,187 @@ $(document).ready(function() {
 			{ data: "fecha" },
 			{ data: "moneda", defaultContent: "-"  }
  			]
-		});
-	async function leerDollar(url) {
-	    try {
-		// 1. Hacemos la petición
-		const respuesta = await fetch(url);
-		// 2. Verificamos que la petición sea exitosa
-		if (!respuesta.ok) {
-		    throw new Error(`Error en la petición: ${respuesta.status}`);
-		}
-		// 3. Leemos y procesamos la información (ej. JSON)
-		const res = await respuesta.json();
-		return res; 
-		
-	    } catch (error) {
-		console.error('Hubo un problema con la petición:', error);
-	    }
-	}
+	});
 	
+///////////////////////////////////////////////////////////////////////////////////////////////////
 	let dollarURL = "https://ve.dolarapi.com/v1/dolares/oficial";
 	const dolar = leerDollar(dollarURL);
-		dolar.then((resultado) => {
+	dolar.then((resultado) => {
+		if (resultado && resultado.fechaActualizacion) {
+			resultado.fechaActualizacion = formatearFechaVenezuela(resultado.fechaActualizacion);
+		}
 	// 2. Agregas la fila y dibujas la tabla una vez que tienes los datos
-			$("#dollar").DataTable().row.add(resultado).draw();
-			}).catch((error) => {
+		$("#dollar").DataTable().row.add(resultado).draw();
+	}).catch((error) => {
 	// Escuchas si la promesa falla
-			console.error("Hubo un error al obtener los datos:", error);
-			})	
+	console.error("❌ Hubo un error al obtener los datos:", error);
+	})	
+///////////////////////////////////////////////////////////////////////////////////////////////////
 	let paraleloURL = "https://ve.dolarapi.com/v1/dolares/paralelo";
 	const paralelo = leerDollar(paraleloURL);
-		paralelo.then((resultado) => {
-	// 2. Agregas la fila y dibujas la tabla una vez que tienes los datos
-			$("#dollar").DataTable().row.add(resultado).draw();
-			}).catch((error) => {
+	paralelo.then((resultado) => {
+		if (resultado && resultado.fechaActualizacion) {
+			resultado.fechaActualizacion = formatearFechaVenezuela(resultado.fechaActualizacion);
+		}
+		resultado.promedio = (resultado.promedio).toFixed(4);
+	// 🚀 2. SUSTITUCIÓN: Interceptamos las palabras y las cambiamos por "USDT"		
+		if (resultado.fuente == "paralelo") {
+		resultado.fuente = "USDT";
+	        }
+		if (resultado.nombre == "Paralelo") {
+			resultado.nombre = "Dólar USDT";
+		}
+	// 3. Agregas la fila y dibujas la tabla una vez que tienes los datos
+		$("#dollar").DataTable().row.add(resultado).draw();
+	}).catch((error) => {
 	// Escuchas si la promesa falla
-			console.error("Hubo un error al obtener los datos:", error);
-			})
+		console.error("❌ Hubo un error al obtener los datos:"+paraleloURL, error);
+	})
+///////////////////////////////////////////////////////////////////////////////////////////////////
 	let euroURL = "https://ve.dolarapi.com/v1/euros/oficial";
 	const euro = leerDollar(euroURL);
-		euro.then((resultado) => {
+	euro.then((resultado) => {
+		if (resultado && resultado.fechaActualizacion) {
+			resultado.fechaActualizacion = formatearFechaVenezuela(resultado.fechaActualizacion);
+		}
+		resultado.promedio = (resultado.promedio).toFixed(4);
 	// 2. Agregas la fila y dibujas la tabla una vez que tienes los datos
-			$("#dollar").DataTable().row.add(resultado).draw();
-			}).catch((error) => {
+	$("#dollar").DataTable().row.add(resultado).draw();
+	}).catch((error) => {
 	// Escuchas si la promesa falla
-			console.error("Hubo un error al obtener los datos:", error);
-			})
-///////////////////////////////////////////////////////////////////////////////////////
-	let dollarHistoyURL = "https://ve.dolarapi.com/v1/historicos/dolares";
-	const dolarhistory = leerDollar(dollarHistoyURL);
-		dolarhistory.then((resultado) => {
-	// 2. Agregas la fila y dibujas la tabla una vez que tienes los datos
-			$("#history").DataTable().rows.add(resultado).draw();
-			}).catch((error) => {
-	// Escuchas si la promesa falla
-			console.error("Hubo un error al obtener los datos:", error);
-		})	
+		console.error("❌ Hubo un error al obtener los datos:", error);
+	})
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Definimos las dos URLs de los históricos
+	const dollarHistoyURL = "https://ve.dolarapi.com/v1/historicos/dolares";
+	const euroHistoryURL = "https://ve.dolarapi.com/v1/historicos/euros";
 
-	let euroHistoryURL = "https://ve.dolarapi.com/v1/historicos/euros";
-	const eurohistory = leerDollar(euroHistoryURL);
-		eurohistory.then((resultado) => {
-	// 2. Agregas la fila y dibujas la tabla una vez que tienes los datos
-			$("#history").DataTable().rows.add(resultado).draw();
-			}).catch((error) => {
-	// Escuchas si la promesa falla
-			console.error("Hubo un error al obtener los datos:", error);
-		})
+	// 🚀 UNIFICACIÓN ASÍNCRONA: Esperamos por ambas respuestas de internet
+	Promise.all([
+		leerDollar(dollarHistoyURL),
+		leerDollar(euroHistoryURL)
+	]).then(([dataDolar, dataEuro]) => {
+    
+	// Creamos un único arreglo vacío donde acumularemos todo
+		let historicoUnificado = [];
 
+	// 1. PROCESAMOS LOS DATOS DE DÓLARES
+		if (dataDolar && Array.isArray(dataDolar)) {
+			dataDolar.forEach((registro) => {
+	// Sustituimos "paralelo" por "USDT" como querías
+				if (registro.fuente === "paralelo") {
+					registro.fuente = "USDT";
+				} else if (registro.fuente === "oficial") {
+					registro.fuente = "BCV";
+				}
+	// 🛠️ IMPORTANTE: Le inyectamos la propiedad moneda que le falta al JSON de la API
+				registro.moneda = "USD"; 
+	// Formateamos su promedio a 2 decimales para la tabla
+				if (registro.promedio) {
+					registro.promedio = parseFloat(registro.promedio).toFixed(2).replace('.', ',');
+				}
+			historicoUnificado.push(registro);
+			});
+		}
 
+	// 2. PROCESAMOS LOS DATOS DE EUROS
+		if (dataEuro && Array.isArray(dataEuro)) {
+			dataEuro.forEach((registro) => {
+	// Sustituimos "paralelo" por "USDT" como querías
+				if (registro.fuente === "paralelo") {
+					registro.fuente = "EUR";
+				} else if (registro.fuente === "oficial") {
+					registro.fuente = "BCV";
+				}
+		    
+	// El Euro ya trae su propiedad registro.moneda = "EUR" desde la API
+				if (registro.promedio) {
+					registro.promedio = parseFloat(registro.promedio).toFixed(2).replace('.', ',');
+				}
+
+				historicoUnificado.push(registro);
+			});
+		}
+
+	// 3. RENDERIZADO ÚNICO EN DATATABLES
+	// Limpiamos la tabla por completo para evitar que se dupliquen datos al recargar
+		$("#history").DataTable().clear();
+
+	// Cargamos la lista combinada (Dólares + Euros) y redibujamos una sola vez (.draw)
+		$("#history").DataTable().rows.add(historicoUnificado).draw();
+    
+		console.log("📊 Historial unificado cargado con éxito en DataTables.");
+
+	}).catch((error) => {
+    console.error("❌ Hubo un error crítico al obtener los históricos unificados:", error);
 });
 
 
+//////////////////////////// FASE #2 CALCULADORA DE DOLARES ///////////////////////////////////////
+	// 1. Obtiene el Dólar Oficial de HOY de forma automática
+	Promise.all([
+		obtenerCotizacionHabil({ moneda: 'dolares', fuente: 'oficial' }),
+		obtenerCotizacionHabil({ moneda: 'dolares', fuente: 'paralelo' }),
+		obtenerCotizacionHabil({ moneda: 'euros', fuente: 'oficial' })
+	]).then(([resBcv, resusdt, resEuro]) => {
 
-// Extraer una variable específica
+	// 2. Guardamos la tasa BCV si respondió con éxito
+		if (resBcv) {
+			$("#bcv").val(resBcv.promedio); console.log("ultima fecha:"+resBcv.fecha);
+			window.tasasCargadas.bcv.promedio = parseFloat(resBcv.promedio).toFixed(4);
+			window.tasasCargadas.bcv.fecha = (resBcv.fecha);
+		}
+
+        // 3. Guardamos la tasa Paralelo si respondió con éxito
+		if (resusdt) {
+			$("#usdt").val(resusdt.promedio);console.log("ultima fecha:"+resusdt.fecha);
+			window.tasasCargadas.usdt.promedio = parseFloat(resusdt.promedio).toFixed(4);
+			window.tasasCargadas.usdt.fecha = (resusdt.fecha);
+		}
+
+	// 4. Guardamos la tasa Euro si respondió con éxito
+		if (resEuro) {
+			$("#euro").val(resEuro.promedio);console.log("ultima fecha:"+resEuro.fecha);
+			window.tasasCargadas.euro.promedio = parseFloat(resEuro.promedio).toFixed(4);
+			window.tasasCargadas.euro.fecha = (resEuro.fecha);
+		}
+
+		console.log("✅ ¡Todas las tasas se han cargado en memoria con éxito!", window.tasasCargadas);
+	// 🚀 AHORA SÍ: Como las tasas no están en cero, el cálculo dará el porcentaje real
+		window.arrayDiferencias = calcularDiferenciasPorcentuales();
+	//console.table(window.arrayDiferencias);
+		
+		$("#txtBCVUSDT").text(window.arrayDiferencias[0].descripcion);
+		$("#resBCVUSDT").text(window.arrayDiferencias[0].texto);
+		$("#txtBCVEURO").text(window.arrayDiferencias[1].descripcion);
+		$("#resBCVEURO").text(window.arrayDiferencias[1].texto);
+		$("#tasaBCV").text(window.tasasCargadas.bcv.promedio+" Bs/USD");	
+		$("#fechaBCV").text(window.arrayDiferencias[0].fecha);	
+		$("#txtUSDTBCV").text(window.arrayDiferencias[2].descripcion);
+		$("#resUSDTBCV").text(window.arrayDiferencias[2].texto);
+		$("#txtUSDTEURO").text(window.arrayDiferencias[3].descripcion);
+		$("#resUSDTEURO").text(window.arrayDiferencias[3].texto);
+		$("#tasaUSDT").text(window.tasasCargadas.usdt.promedio+" Bs/USDT");
+		$("#fechaUSDT").text(window.arrayDiferencias[3].fecha);	
+		$("#txtEUROBCV").text(window.arrayDiferencias[4].descripcion);
+		$("#resEUROBCV").text(window.arrayDiferencias[4].texto);
+		$("#txtEUROUSDT").text(window.arrayDiferencias[5].descripcion);
+		$("#resEUROUSDT").text(window.arrayDiferencias[5].texto);
+		$("#tasaEURO").text(window.tasasCargadas.euro.promedio+" Bs/EURO");
+		$("#fechaEURO").text(window.arrayDiferencias[5].fecha);	
+		
+		$("#montobcv").prop("readOnly", false);$("#montousdt").prop("readOnly", false);$("#montoeuro").prop("readOnly", false);
+
+        // Actualizamos los montos de la calculadora de bolívares en pantalla
+		if (typeof calcularConversiones === "function") {
+			calcularConversiones();resetCampoTasas();
+		}
+
+	}).catch(error => {
+		console.error("❌ Ocurrió un error al procesar las promesas unificadas:", error);
+	});
+	
+});
 
 </script>
 
