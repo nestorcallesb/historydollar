@@ -133,23 +133,23 @@
 	window.limpiarFormatoDecimal = function(valor) {
 		if (!valor) return '';
 
-	// 1. Reemplazamos cualquier coma por un punto para estandarizar los decimales
+	 //1. Reemplazamos cualquier coma por un punto para estandarizar los decimales
 		valor = valor.replace(/,/g, '.');
 
-	// 2. Permitimos solo números y un único punto decimal
+	//2. Permitimos solo números y un único punto decimal
 		valor = valor.replace(/[^0-9.]/g, '');
 
-	// 3. Evitamos que se escriba más de un punto decimal
+	//3. Evitamos que se escriba más de un punto decimal
 		let puntos = valor.split('.');
 		if (puntos.length > 2) {
 			valor = puntos[0] + '.' + puntos.slice(1).join('');
 		}
 
-	// 4. Expresión regular para limitar estrictamente a un máximo de 2 decimales
+	//4. Expresión regular para limitar estrictamente a un máximo de 2 decimales
 		let regexDecimal = /^\d*(\.\d{0,2})?/;
 		let resultado = valor.match(regexDecimal);
 
-	// 5. Devolvemos el valor corregido
+	//5. Devolvemos el valor corregido
 		return resultado ? resultado[0] : '';
 	};
 
@@ -297,13 +297,18 @@
 		$("#bcv").val((window.calculo.montobcv * tBcv).toFixed(3));
 		$("#usdt").val((window.calculo.montousdt * tUsdt).toFixed(3));
 		$("#euro").val((window.calculo.montoeuro * tEuro).toFixed(3));
+		
 		console.table(window.calculo);
 		activarEscuchaInputs();
+		$("#montobcv").val((window.calculo.montobcv));
+		$("#montousdt").val((window.calculo.montousdt));
+		$("#montoeuro").val((window.calculo.montoeuro));
 	}
 
 	function activarEscuchaInputs() {
 		$('#montobcv, #montousdt, #montoeuro').on('input.calculadora', function() {
-			this.value = window.limpiarFormatoDecimal(this.value);
+
+			//this.value = window.limpiarFormatoDecimal(this.value);
 			calcularConversiones(this.id);
 		});
 	}
@@ -318,7 +323,7 @@
 		window.calculo.bsbcv= window.tasasCargadas.bcv.promedio;
 		window.calculo.bsusdt= window.tasasCargadas.usdt.promedio;
 		window.calculo.bseuro= window.tasasCargadas.euro.promedio;		
-	} 
+	}
 
 /* 
 #montobcv

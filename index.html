@@ -35,7 +35,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text bg-primary text-white font-weight-bold">Monto USD ($)</span>
 					</div>
-					<input type="number" class="form-control" id="montobcv" placeholder="1.00" value="1.00" step="0.01" min="0" readOnly>
+					<input type="number" class="form-control" id="montobcv" placeholder="1.00" value="1.00" step="0.001" min="0" readOnly>
 				</div>
 
 				<p class="mb-1 text-muted small">
@@ -62,7 +62,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text bg-danger text-white font-weight-bold">Monto USDT ($)</span>
 					</div>
-					<input type="number" class="form-control" id="montousdt" placeholder="1.00" value="1.00" step="0.01" min="0" readOnly>
+					<input type="number" class="form-control" id="montousdt" placeholder="1.00" value="1.00" step="0.001" min="0" readOnly>
 				</div>
 				<p class="mb-1 text-muted small">
 					<span id="txtUSDTBCV">% de Diferencia: </span> 
@@ -87,7 +87,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text bg-success text-white font-weight-bold">Monto EURO (€)</span>
 					</div>
-					<input type="number" class="form-control" id="montoeuro" placeholder="1.00" value="1.00" step="0.01" min="0" readOnly>
+					<input type="number" class="form-control" id="montoeuro" placeholder="1.00" value="1.00" step="0.001" min="0" readOnly>
 				</div>
 				<p class="mb-1 text-muted small">
 					<span id="txtEUROBCV">% de Diferencia: </span> 
@@ -237,6 +237,7 @@ $(document).ready(function() {
 	});
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	let dollarURL = "https://ve.dolarapi.com/v1/dolares/oficial";
 	const dolar = leerDollar(dollarURL);
 	dolar.then((resultado) => {
