@@ -37,7 +37,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text bg-info text-white font-weight-bold">Monto Bs (VES)</span>
                 </div>
-                <input type="number" class="form-control" id="bolivares" placeholder="1.00" value="1.00" step="0.001" min="0" readOnly>
+                <input type="text" class="form-control" id="bolivares" placeholder="0.00" value="0.00" step="0.001" min="0" readOnly>
             </div>
         </div>
 		<div class="row">
@@ -47,7 +47,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text bg-primary text-white font-weight-bold">Monto USD ($)</span>
 					</div>
-					<input type="number" class="form-control" id="montobcv" placeholder="1.00" value="1.00" step="0.001" min="0" readOnly>
+					<input type="text" class="form-control" id="montobcv" placeholder="0.00" value="0.00" step="0.001" min="0" readOnly>
 				</div>
 
 				<p class="mb-1 text-muted small">
@@ -74,7 +74,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text bg-danger text-white font-weight-bold">Monto USDT ($)</span>
 					</div>
-					<input type="number" class="form-control" id="montousdt" placeholder="1.00" value="1.00" step="0.001" min="0" readOnly>
+					<input type="text" class="form-control" id="montousdt" placeholder="0.00" value="0.00" step="0.001" min="0" readOnly>
 				</div>
 				<p class="mb-1 text-muted small">
 					<span id="txtUSDTBCV">% de Diferencia: </span> 
@@ -99,7 +99,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text bg-success text-white font-weight-bold">Monto EURO (€)</span>
 					</div>
-					<input type="number" class="form-control" id="montoeuro" placeholder="1.00" value="1.00" step="0.001" min="0" readOnly>
+					<input type="text" class="form-control" id="montoeuro" placeholder="0.00" value="0.00" step="0.001" min="0" readOnly>
 				</div>
 				<p class="mb-1 text-muted small">
 					<span id="txtEUROBCV">% de Diferencia: </span> 
@@ -395,7 +395,7 @@ $(document).ready(function() {
 		$("#fechaEURO").text(window.arrayDiferencias[5].fecha);	
 		
 		$("#montobcv").prop("readOnly", false);$("#montousdt").prop("readOnly", false);$("#montoeuro").prop("readOnly", false);
-
+		$("#bolivares").prop("readOnly", false);
         // Actualizamos los montos de la calculadora de bolívares en pantalla
 		if (typeof calcularConversiones === "function") {
 			calcularConversiones();resetCampoTasas();

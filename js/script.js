@@ -138,7 +138,7 @@
 
 	//2. Permitimos solo números y un único punto decimal
 		valor = valor.replace(/[^0-9.]/g, '');
-
+		
 	//3. Evitamos que se escriba más de un punto decimal
 		let puntos = valor.split('.');
 		if (puntos.length > 2) {
@@ -235,8 +235,7 @@
 		const tBcv = window.tasasCargadas.bcv.promedio || 0;
 		const tUsdt = window.tasasCargadas.usdt.promedio || 0;
 		const tEuro = window.tasasCargadas.euro.promedio || 0;
-				calculoinicial();
-				//console.log(tBcv+" / "+tUsdt+" / "+tEuro);
+				calculoinicial();	//console.log(tBcv+" / "+tUsdt+" / "+tEuro);
 		if (tBcv === 0 || tUsdt === 0 || tEuro === 0) return;
 
 		let montoIngresado = parseFloat($("#" + campoModificado).val()) || 0;
@@ -281,40 +280,98 @@
 
 			window.calculo.bsusdt = parseFloat(window.calculo.montoeuro * tUsdt).toFixed(3);
 
+		} else if (campoModificado === "bolivares") {
+			window.calculo.bsbcv = parseFloat(montoIngresado).toFixed(3);
+			window.calculo.bsusdt = parseFloat(montoIngresado).toFixed(3);
+			window.calculo.bseuro = parseFloat(montoIngresado).toFixed(3);
+
+			window.calculo.montobcv = parseFloat(window.calculo.bseuro / tBcv).toFixed(3);
+
+			window.calculo.montousdt = parseFloat(window.calculo.bseuro / tUsdt).toFixed(3);
+
+			window.calculo.montoeuro = parseFloat(window.calculo.bsusdt / tEuro).toFixed(3);
 		}
 
     // Desactivamos temporalmente para evitar bucles cruzados infinitos
-		$('#montobcv, #montousdt, #montoeuro').off('input.calculadora');
+		$('#montobcv, #montousdt, #montoeuro','#bolivares').off('input.calculadora');
 
 		if (campoModificado === "montousdt") {
+			$('#montobcv').val(window.calculo.montobcv > 0 ? window.calculo.montobcv : '');
 			$('#montousdt').val(window.calculo.montousdt > 0 ? window.calculo.montousdt : '');
+			$('#montoeuro').val(window.calculo.montoeuro > 0 ? window.calculo.montoeuro : '');
+
 			$("#bolivares").val((window.calculo.montousdt * tUsdt).toFixed(3));
 		}
 		if (campoModificado === "montoeuro") {
+			$('#montobcv').val(window.calculo.montobcv > 0 ? window.calculo.montobcv : '');
+			$('#montousdt').val(window.calculo.montousdt > 0 ? window.calculo.montousdt : '');
 			$('#montoeuro').val(window.calculo.montoeuro > 0 ? window.calculo.montoeuro : '');
+
 			$("#bolivares").val((window.calculo.montoeuro * tEuro).toFixed(3));
 		}
 		if (campoModificado === "montobcv") {
 			$('#montobcv').val(window.calculo.montobcv > 0 ? window.calculo.montobcv : '');
+			$('#montousdt').val(window.calculo.montousdt > 0 ? window.calculo.montousdt : '');
+			$('#montoeuro').val(window.calculo.montoeuro > 0 ? window.calculo.montoeuro : '');
+
 			$("#bolivares").val((window.calculo.montobcv * tBcv).toFixed(3));
+		}
+		if (campoModificado === "bolivares") {
+			console.log(campoModificado+" pasa por aqui")
+			$('#montobcv').val(window.calculo.montobcv > 0 ? window.calculo.montobcv : '');
+			$('#montousdt').val(window.calculo.montousdt > 0 ? window.calculo.montousdt : '');
+			$('#montoeuro').val(window.calculo.montoeuro > 0 ? window.calculo.montoeuro : '');
 		}
 
 
 		
 		console.table(window.calculo);
 		activarEscuchaInputs();
-		$("#montobcv").val((window.calculo.montobcv));
-		$("#montousdt").val((window.calculo.montousdt));
-		$("#montoeuro").val((window.calculo.montoeuro));
+//		$("#montobcv").val((window.calculo.montobcv));
+//		$("#montousdt").val((window.calculo.montousdt));
+//		$("#montoeuro").val((window.calculo.montoeuro));
 	}
 
-	function activarEscuchaInputs() {
-		$('#montobcv, #montousdt, #montoeuro').on('input.calculadora', function() {
+function activarEscuchaInputs() {
+	let temporizadorDebounce; // Variable para controlar el retraso
+    $('#montobcv, #montousdt, #montoeuro, #bolivares').on('keydown.calculadora', function(e) {
+        const caracterPulsado = e.key;
 
-			//this.value = window.limpiarFormatoDecimal(this.value);
-			calcularConversiones(this.id);
-		});
-	}
+        // 1. Permitir teclas de control del sistema (Borrar, flechas, tabulador, etc.)
+        const teclasControl = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Enter'];
+        if (teclasControl.includes(caracterPulsado)) {
+            return; // Permitimos la acción y salimos
+        }
+
+        // 2. Validar si es un número o un punto decimal
+        // Permite dígitos del 0 al 9 y el carácter '.'
+        const esNumeroOPunto = /^[0-9.]$/.test(caracterPulsado);
+
+        // 3. (Opcional) Evitar que escriban más de un punto decimal en el mismo input
+        if (caracterPulsado === '.' && this.value.includes('.')) {
+            e.preventDefault(); // Bloquea el segundo punto
+            return;
+        }
+
+        // Si no es un número ni un punto, bloqueamos la escritura
+        if (!esNumeroOPunto) {
+            e.preventDefault();
+        }
+    });
+
+    // Mantenemos el evento 'input' original para calcular las conversiones en tiempo real
+    $('#montobcv, #montousdt, #montoeuro, #bolivares').on('input.calculadora', function() {
+        const inputId = this.id;
+
+        // Cancelamos el cálculo anterior si el usuario sigue escribiendo rápido
+        clearTimeout(temporizadorDebounce);
+
+        // Programamos el cálculo para 150 milisegundos después de que deje de teclear
+        temporizadorDebounce = setTimeout(function() {
+            calcularConversiones(inputId);
+        }, 150); // Puedes ajustar este número (150ms es imperceptible para el usuario)
+    });
+}
 
 	function resetCampoTasas() {
 		$('#montobcv').val("1.00");$('#montousdt').val("1.00");$('#montoeuro').val("1.00");
