@@ -374,7 +374,9 @@ function activarEscuchaInputs() {
 }
 
 	function resetCampoTasas() {
-		$('#montobcv').val("1.00");$('#montousdt').val("1.00");$('#montoeuro').val("1.00");
+		$('#montobcv').val(window.tasasCargadas.bcv.promedio);
+		$('#montousdt').val(window.tasasCargadas.usdt.promedio);
+		$('#montoeuro').val(window.tasasCargadas.usdt.promedio);
 	}
 	function calculoinicial(){
 		window.calculo.bsbcv= window.tasasCargadas.bcv.promedio;
