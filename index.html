@@ -34,11 +34,12 @@
         <!-- 2. Tu columna queda aquí dentro perfectamente alineada al medio -->
         <div class="col-md-6 col-lg-4">
 <div class="form-group mb-3">
-    <label for="bolivares" class="font-weight-bold text-muted small">Monto Bs (VES)</label>
+    <label for="bolivares" class="font-weight-bold text-muted small">Monto Bolivares (VES)</label>
     <div class="input-group">
-        <input type="text" id="bolivares" class="form-control" value="1.00" readonly style="padding: 12px; height: auto;">
+<span class="input-group-text bg-info text-white font-weight-bold">Bs (VES)</span>
+        <input type="text" id="bolivares" class="form-control" value="1.00" readonly style="padding: 12px; height: auto; width: 60%; max-width: 200px;">
         <div class="input-group-append">
-            <button class="btn btn-secondary btn-copiar-calculadora" type="button" data-target="bolivares" style="font-weight: 600;">Copiar</button>
+            <button class="btn btn-info btn-copiar-calculadora" type="button" data-target="bolivares" style="font-weight: 600;">Copiar</button>
         </div>
     </div>
 </div>
@@ -49,9 +50,10 @@
 		<!-- Bloque Dólares -->
 			<div class="col-md-4 border-right">
 <div class="form-group mb-3">
-    <label for="montobcv" class="font-weight-bold text-muted small">Monto USD ($) - BCV</label>
+	    <label for="montobcv" class="font-weight-bold text-muted small">Monto USD ($) BCV</label>
     <div class="input-group">
-        <input type="text" id="montobcv" class="form-control" value="0.00" readonly style="padding: 12px; height: auto;">
+<span class="input-group-text bg-primary text-white font-weight-bold">USD ($)</span>
+        <input type="text" id="montobcv" class="form-control" value="0.00" readonly style="padding: 12px; height: auto; width: 60%; max-width: 200px;">
         <div class="input-group-append">
             <button class="btn btn-primary btn-copiar-calculadora" type="button" data-target="montobcv" style="font-weight: 600;">Copiar</button>
         </div>
@@ -80,7 +82,8 @@
 <div class="form-group mb-3">
     <label for="montousdt" class="font-weight-bold text-muted small">Monto USDT ($)</label>
     <div class="input-group">
-        <input type="text" id="montousdt" class="form-control" value="0.00" readonly style="padding: 12px; height: auto;">
+<span class="input-group-text bg-danger text-white font-weight-bold">USDT ($)</span>
+        <input type="text" id="montousdt" class="form-control" value="0.00" readonly style="padding: 12px; height: auto; width: 60%; max-width: 200px;">
         <div class="input-group-append">
             <button class="btn btn-danger btn-copiar-calculadora" type="button" data-target="montousdt" style="font-weight: 600;">Copiar</button>
         </div>
@@ -108,7 +111,8 @@
 <div class="form-group mb-3">
     <label for="montoeuro" class="font-weight-bold text-muted small">Monto EURO (€)</label>
     <div class="input-group">
-        <input type="text" id="montoeuro" class="form-control" value="0.00" readonly style="padding: 12px; height: auto;">
+<span class="input-group-text bg-success text-white font-weight-bold">EURO (€)</span>
+        <input type="text" id="montoeuro" class="form-control" value="0.00" readonly style="padding: 12px; height: auto; width: 60%; max-width: 200px;">
         <div class="input-group-append">
             <button class="btn btn-success btn-copiar-calculadora" type="button" data-target="montoeuro" style="font-weight: 600;">Copiar</button>
         </div>
