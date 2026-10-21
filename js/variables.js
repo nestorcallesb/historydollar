@@ -1,11 +1,11 @@
 
-	window.urls = [
-		urlbcv = "https://ve.dolarapi.com/v1/dolares/oficial",
-		urlusdt = "https://ve.dolarapi.com/v1/dolares/paralelo",
-		urleuro = "https://ve.dolarapi.com/v1/euros/oficial",
-		urlhdolar = 'https://ve.dolarapi.com/v1/historicos/dolares',
-		urlheuro = 'https://ve.dolarapi.com/v1/historicos/euros'
-	];
+	window.urls = {
+		urlbcv : 'https://ve.dolarapi.com/v1/dolares/oficial',
+		urlusdt : 'https://ve.dolarapi.com/v1/dolares/paralelo',
+		urleuro : 'https://ve.dolarapi.com/v1/euros/oficial',
+		urlhdolar : 'https://ve.dolarapi.com/v1/historicos/dolares',
+		urlheuro : 'https://ve.dolarapi.com/v1/historicos/euros'
+	};
     
 	window.tasasCargadas = {
 		bcv: {promedio: 0, fecha: "" },
