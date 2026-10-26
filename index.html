@@ -19,125 +19,124 @@
 <body>
 <div class="d-none d-sm-block"><hr></div>
 
-	<!--	SECCION N°7: Consola de registro de eventos	-->
-	<div class="card">
+<!--	SECCION N°7: Consola de registro de eventos	-->
 
-<!-- FILA 2: Panel de Conversión en Tiempo Real -->
-<!-- FILA 2: Sección de Conversión Multidivisa -->
+<div class="card">
 
-<div class="bg-light p-4 rounded border m-auto">
-    <h5 class="mb-3 text-secondary text-center font-weight-bold">Calculadora de Conversión en Tiempo Real (VES)</h5>
-    
-    <!-- 1. Creamos una fila y le añadimos 'justify-content-center' para centrar todo su contenido -->
-    <div class="row justify-content-center">
-        
-        <!-- 2. Tu columna queda aquí dentro perfectamente alineada al medio -->
-        <div class="col-md-6 col-lg-4">
-<div class="form-group mb-3">
-    <label for="bolivares" class="font-weight-bold text-muted small">Monto Bolivares (VES)</label>
-    <div class="input-group">
-<span class="input-group-text bg-info text-white font-weight-bold">Bs(VES)</span>
-        <input type="text" id="bolivares" class="form-control" value="1.00" readonly style="padding: 12px; height: auto; width: 60%; max-width: 200px;">
-        <div class="input-group-append">
-            <button class="btn btn-info btn-copiar-calculadora" type="button" data-target="bolivares" style="font-size: 11px; font-weight: 600;">Copiar</button>
-        </div>
-    </div>
-</div>
-        </div>
-
-		<div class="row">
-
-		<!-- Bloque Dólares -->
-			<div class="col-md-4 border-right">
-<div class="form-group mb-3">
-	    <label for="montobcv" class="font-weight-bold text-muted small">Monto USD ($) BCV</label>
-    <div class="input-group">
-<span class="input-group-text bg-primary text-white font-weight-bold">USD($)</span>
-        <input type="text" id="montobcv" class="form-control" value="0.00" readonly style="padding: 12px; height: auto; width: 50%; max-width: 200px;">
-        <div class="input-group-append">
-            <button class="btn btn-primary btn-copiar-calculadora" type="button" data-target="montobcv" style="font-size: 11px; font-weight: 600;">Copiar</button>
-        </div>
-    </div>
-</div>
-				<p class="mb-1 text-muted small">
-					<span id="txtBCVUSDT">% de Diferencia: </span> 
-					<span class="font-weight-bold text-dark" id="resBCVUSDT">0.00 %</span>
-				</p>
-				<p class="mb-1 text-muted small">
-					<span id="txtBCVEURO">% de Diferencia: </span> 
-					<span class="font-weight-bold text-dark" id="resBCVEURO">0.00 %</span>
-				</p>
-				<p class="mb-1 text-muted small">
-					<span >Tasa: </span> 
-					<span class="font-weight-bold text-dark" id="tasaBCV"> </span>
-				</p>
-
-				<p class="mb-1 text-muted small">
-					<span >Fecha tasa: </span> 
-					<span class="font-weight-bold text-dark" id="fechaBCV"> </span>
-				</p>
+	<div class="bg-light p-4 rounded border m-auto">
+    	<h5 class="mb-3 text-secondary text-center font-weight-bold">Calculadora de Conversión en Tiempo Real (VES)</h5>
+<!-- 1. Creamos una fila y le añadimos 'justify-content-center' para centrar todo su contenido -->
+		<div class="row justify-content-center">
+<!-- 2. Tu columna queda aquí dentro perfectamente alineada al medio -->
+			<div class="col-md-6 col-lg-4">
+				<div class="form-group mb-3">
+					<label for="bolivares" class="font-weight-bold text-muted small">Monto Bolivares (VES)</label>
+					<div class="input-group">
+						<span class="btn-toggle-spans input-group-text bg-info text-white font-weight-bold">Bs(VES)</span>
+							<input type="text" id="bolivares" class="form-control" value="1.00" readonly style="padding: 12px; height: auto; width: 60%; max-width: 200px;">
+						<div class="input-group-append">
+							<button class="btn btn-info btn-copiar-calculadora" type="button" data-target="bolivares" style="font-size: 11px; font-weight: 600;">Copiar</button>
+						</div>
+					</div>
+				</div>
 			</div>
-	<!-- Bloque Dólares USDT -->
-			<div class="col-md-4 border-right">
-<div class="form-group mb-3">
-    <label for="montousdt" class="font-weight-bold text-muted small">Monto USDT ($)</label>
-    <div class="input-group">
-<span class="input-group-text bg-danger text-white font-weight-bold">USDT($)</span>
-        <input type="text" id="montousdt" class="form-control" value="0.00" readonly style="padding: 12px; height: auto; width: 50%; max-width: 200px;">
-        <div class="input-group-append">
-            <button class="btn btn-danger btn-copiar-calculadora" type="button" data-target="montousdt" style="font-size: 11px; font-weight: 600;">Copiar</button>
-        </div>
-    </div>
-</div>
-				<p class="mb-1 text-muted small">
-					<span id="txtUSDTBCV">% de Diferencia: </span> 
-					<span class="font-weight-bold text-dark" id="resUSDTBCV">0.00 %</span>
-				</p>
-				<p class="mb-1 text-muted small">
-					<span id="txtUSDTEURO">% de Diferencia: </span> 
-					<span class="font-weight-bold text-dark" id="resUSDTEURO">0.00 %</span>
-				</p>
-				<p class="mb-1 text-muted small">
-					<span >Tasa: </span> 
-					<span class="font-weight-bold text-dark" id="tasaUSDT"> </span>
-				</p>
-				<p class="mb-1 text-muted small">
-					<span >Fecha tasa: </span> 
-					<span class="font-weight-bold text-dark" id="fechaUSDT"> </span>
-				</p>
+			<div class="row">
+<!-- Bloque Dólares -->
+				<div class="col-md-4 border-right">
+					<div class="form-group mb-3">
+					    <label for="montobcv" class="font-weight-bold text-muted small">Monto USD ($) BCV</label>
+				    	<div class="input-group">
+							<span class="btn-toggle-spans input-group-text bg-primary text-white font-weight-bold">USD($)</span>
+				        	<input type="text" id="montobcv" class="form-control" value="0.00" readonly style="padding: 12px; height: auto; width: 50%; max-width: 200px;">
+				        	<div class="input-group-append">
+				            	<button class="btn btn-primary btn-copiar-calculadora" type="button" data-target="montobcv" style="font-size: 11px; font-weight: 600;">Copiar</button>
+				        	</div>
+				    	</div>
+					</div>
+						<p class="mb-1 text-muted small">
+							<span >Tasa: </span> 
+							<span class="font-weight-bold text-dark" id="tasaBCV"> </span>
+						</p>
+				    <div class="collapse show" id="seccionSpans" >
+
+						<p class="mb-1 text-muted small">
+							<span >Fecha tasa: </span> 
+							<span class="font-weight-bold text-dark" id="fechaBCV"> </span>
+						</p>
+						<p class="mb-1 text-muted small">
+							<span id="txtBCVUSDT">% de Diferencia: </span> 
+							<span class="font-weight-bold text-dark" id="resBCVUSDT">0.00 %</span>
+						</p>
+						<p class="mb-1 text-muted small">
+							<span id="txtBCVEURO">% de Diferencia: </span> 
+							<span class="font-weight-bold text-dark" id="resBCVEURO">0.00 %</span>
+						</p>
+					</div>
+				</div>
+<!-- Bloque Dólares USDT -->
+				<div class="col-md-4 border-right">
+					<div class="form-group mb-3">
+					    <label for="montousdt" class="font-weight-bold text-muted small">Monto USDT ($)</label>
+						<div class="input-group">
+							<span class="btn-toggle-spans input-group-text bg-danger text-white font-weight-bold">USDT($)</span>
+				        	<input type="text" id="montousdt" class="form-control" value="0.00" readonly style="padding: 12px; height: auto; width: 50%; max-width: 200px;">
+				        	<div class="input-group-append">
+				        	    <button class="btn btn-danger btn-copiar-calculadora" type="button" data-target="montousdt" style="font-size: 11px; font-weight: 600;">Copiar</button>
+				        	</div>
+						</div>
+					</div>
+						<p class="mb-1 text-muted small">
+							<span >Tasa: </span> 
+							<span class="font-weight-bold text-dark" id="tasaUSDT"> </span>
+						</p>
+				    <div class="collapse show" id="seccionSpans" >
+						<p class="mb-1 text-muted small">
+							<span >Fecha tasa: </span> 
+							<span class="font-weight-bold text-dark" id="fechaUSDT"> </span>
+						</p>
+						<p class="mb-1 text-muted small">
+							<span id="txtUSDTBCV">% de Diferencia: </span> 
+							<span class="font-weight-bold text-dark" id="resUSDTBCV">0.00 %</span>
+						</p>
+						<p class="mb-1 text-muted small">
+							<span id="txtUSDTEURO">% de Diferencia: </span> 
+							<span class="font-weight-bold text-dark" id="resUSDTEURO">0.00 %</span>
+						</p>
+					</div>
+				</div>	
+<!-- Bloque Euros -->
+				<div class="col-md-4 mt-3 mt-md-0">
+					<div class="form-group mb-3">
+						<label for="montoeuro" class="font-weight-bold text-muted small">Monto EURO (€)</label>
+						<div class="input-group">
+							<span class="btn-toggle-spans input-group-text bg-success text-white font-weight-bold">EURO(€)</span>
+							<input type="text" id="montoeuro" class="form-control" value="0.00" readonly style="padding: 12px; height: auto; width: 50%; max-width: 200px;">
+							<div class="input-group-append">
+								<button class="btn btn-success btn-copiar-calculadora" type="button" data-target="montoeuro" style="font-size: 11px; font-weight: 600;">Copiar</button>
+							</div>
+						</div>
+					</div>
+						<p class="mb-1 text-muted small">
+							<span >Tasa: </span> 
+							<span class="font-weight-bold text-dark" id="tasaEURO"> </span>
+						</p>
+				    <div class="collapse show" id="seccionSpans" >
+						<p class="mb-1 text-muted small">
+							<span >Fecha tasa: </span> 
+							<span class="font-weight-bold text-dark" id="fechaEURO"> </span>
+						</p>
+						<p class="mb-1 text-muted small">
+							<span id="txtEUROBCV">% de Diferencia: </span> 
+							<span class="font-weight-bold text-dark" id="resEUROBCV">0.00 %</span>
+						</p>
+						<p class="mb-1 text-muted small">
+							<span id="txtEUROUSDT">% de Diferencia: </span> 
+							<span class="font-weight-bold text-dark" id="resEUROUSDT">0.00 %</span>
+						</p>
+					</div>
+				</div>
 			</div>	
-	<!-- Bloque Euros -->
-			<div class="col-md-4 mt-3 mt-md-0">
-<div class="form-group mb-3">
-    <label for="montoeuro" class="font-weight-bold text-muted small">Monto EURO (€)</label>
-    <div class="input-group">
-<span class="input-group-text bg-success text-white font-weight-bold">EURO(€)</span>
-        <input type="text" id="montoeuro" class="form-control" value="0.00" readonly style="padding: 12px; height: auto; width: 50%; max-width: 200px;">
-        <div class="input-group-append">
-            <button class="btn btn-success btn-copiar-calculadora" type="button" data-target="montoeuro" style="font-size: 11px; font-weight: 600;">Copiar</button>
-        </div>
-    </div>
-</div>
-				<p class="mb-1 text-muted small">
-					<span id="txtEUROBCV">% de Diferencia: </span> 
-					<span class="font-weight-bold text-dark" id="resEUROBCV">0.00 %</span>
-				</p>
-				<p class="mb-1 text-muted small">
-					<span id="txtEUROUSDT">% de Diferencia: </span> 
-					<span class="font-weight-bold text-dark" id="resEUROUSDT">0.00 %</span>
-				<p class="mb-1 text-muted small">
-					<span >Tasa: </span> 
-					<span class="font-weight-bold text-dark" id="tasaEURO"> </span>
-				</p>
-				<p class="mb-1 text-muted small">
-					<span >Fecha tasa: </span> 
-					<span class="font-weight-bold text-dark" id="fechaEURO"> </span>
-				</p>
-			</div>
 		</div>
-	</div>
-
-	
 	<div class="cuerpo" id="calculo">
 		<div class="row row-cols-1 row-cols-md-3 align-items-center m-auto mb-4">
 			<div class="col p-1">
@@ -147,62 +146,58 @@
 	</div>	
 <!-- FIN DE LOS INPUTS-->
 	
-		<div class="card-body">
-			<div class="col-10 cabecera d-none d-md-block text-center h3 font-weight-bold">
-			TASA DOLAR BCV, DOLAR USDT Y EURO
-			</div>
-			<div class="cuerpo" id="consola">
-
-				<table class="table table-hover table-condensed table-bordered" id="dollar">
-					<thead style="background-color: #dc3545;color: white; font-weight: bold;">
-						<tr>
-							<th>Moneda</th>
-							<th>Fuente</th>
-							<th>Nombre</th>
-							<th>Promedio</th>
-							<th>Fecha Actualizacion</th>							
-						</tr>
-					</thead>
-					<tfoot style="background-color: #ccc;color: white; font-weight: bold;">		
-						<tr>
-							<th>Moneda</th>
-							<th>Fuente</th>
-							<th>Nombre</th>
-							<th>Promedio</th>
-							<th>Fecha Actualizacion</th>							
-						</tr>
-					</tfoot>
-					<tbody style="background-color: white;color: gray; font-weight: bold;" id="foot">
-					</tbody>
-				</table>				
-			</div>
+	<div class="card-body">
+		<div class="col-10 cabecera d-none d-md-block text-center h3 font-weight-bold">
+		TASA DOLAR BCV, DOLAR USDT Y EURO
 		</div>
-		<div class="card-body">
-			<div class="col-10 cabecera d-none d-md-block text-center h3 font-weight-bold">
-			HISTORICO DE TASA DOLAR BCV, DOLAR USDT Y EURO
-			</div>
-			<div class="cuerpo" id="historico">
-				<table class="table table-hover table-condensed table-bordered" id="history">
-					<thead style="background-color: #dc3545;color: white; font-weight: bold;">
-						<tr>
-							<th>Fuente</th>
-							<th>Promedio</th>
-							<th>Fecha</th>
-							<th>Moneda</th>								
-						</tr>
-					</thead>
-					<tfoot style="background-color: #ccc;color: white; font-weight: bold;">		
-						<tr>
-							<th>Fuente</th>
-							<th>Promedio</th>
-							<th>Fecha</th>	
-							<th>Moneda</th>							
-						</tr>
-					</tfoot>
-					<tbody style="background-color: white;color: gray; font-weight: bold;" id="foot">
-					</tbody>
-				</table>				
-			</div>
+		<div class="cuerpo" id="consola">
+			<table class="table table-hover table-condensed table-bordered" id="dollar">
+				<thead style="background-color: #dc3545;color: white; font-weight: bold;">
+					<tr>
+						<th>Moneda</th>
+						<th>Fuente</th>
+						<th>Nombre</th>
+						<th>Promedio</th>
+						<th>Fecha Actualizacion</th>							
+					</tr>
+				</thead>
+				<tfoot style="background-color: #ccc;color: white; font-weight: bold;">		
+					<tr>
+						<th>Moneda</th>
+						<th>Fuente</th>
+						<th>Nombre</th>
+						<th>Promedio</th>
+						<th>Fecha Actualizacion</th>							
+					</tr>
+				</tfoot>
+				<tbody style="background-color: white;color: gray; font-weight: bold;" id="foot"></tbody>
+			</table>				
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="col-10 cabecera d-none d-md-block text-center h3 font-weight-bold">
+		HISTORICO DE TASA DOLAR BCV, DOLAR USDT Y EURO
+		</div>
+		<div class="cuerpo" id="historico">
+			<table class="table table-hover table-condensed table-bordered" id="history">
+				<thead style="background-color: #dc3545;color: white; font-weight: bold;">
+					<tr>
+						<th>Fuente</th>
+						<th>Promedio</th>
+						<th>Fecha</th>
+						<th>Moneda</th>								
+					</tr>
+				</thead>
+				<tfoot style="background-color: #ccc;color: white; font-weight: bold;">		
+					<tr>
+						<th>Fuente</th>
+						<th>Promedio</th>
+						<th>Fecha</th>	
+						<th>Moneda</th>							
+					</tr>
+				</tfoot>
+					<tbody style="background-color: white;color: gray; font-weight: bold;" id="foot"></tbody>
+			</table>				
 		</div>
 	</div>
 </div>

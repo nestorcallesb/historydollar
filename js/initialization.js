@@ -82,10 +82,8 @@ $(document).ready(function() {
 		console.error("❌ Hubo un error al obtener los datos:", error);
 	})
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// Definimos las dos URLs de los históricos
-//	const dollarHistoyURL = "https://ve.dolarapi.com/v1/historicos/dolares";
-//	const euroHistoryURL = "https://ve.dolarapi.com/v1/historicos/euros";
-	const dollarHistoyURL = window.urls.urlheuro;
+	// Definimos las dos URLs de los históricos
+	const dollarHistoyURL = window.urls.urlhdolar;
 	const euroHistoryURL = window.urls.urlheuro;
 	// 🚀 UNIFICACIÓN ASÍNCRONA: Esperamos por ambas respuestas de internet
 	Promise.all([
@@ -109,7 +107,7 @@ $(document).ready(function() {
 				registro.moneda = "USD"; 
 	// Formateamos su promedio a 2 decimales para la tabla
 				if (registro.promedio) {
-					registro.promedio = parseFloat(registro.promedio).toFixed(2).replace('.', ',');
+					registro.promedio = parseFloat(registro.promedio).toFixed(3).replace('.', ',');
 				}
 			historicoUnificado.push(registro);
 			});
@@ -127,7 +125,7 @@ $(document).ready(function() {
 		    
 	// El Euro ya trae su propiedad registro.moneda = "EUR" desde la API
 				if (registro.promedio) {
-					registro.promedio = parseFloat(registro.promedio).toFixed(2).replace('.', ',');
+					registro.promedio = parseFloat(registro.promedio).toFixed(3).replace('.', ',');
 				}
 
 				historicoUnificado.push(registro);
@@ -219,7 +217,12 @@ $(document).ready(function() {
 	}).catch(error => {
 		console.error("❌ Ocurrió un error al procesar las promesas unificadas:", error);
 	});
-	
+
+		$('.btn-toggle-spans').on('click', function() {
+	    // Alterna entre colapsar y expandir la estructura
+			$('.collapse').collapse('toggle');
+		});
+
 		$('.btn-copiar-calculadora').on('click', function() {
 		var $boton = $(this);
 		var inputId = $boton.data('target'); // Obtiene el ID asignado (bolivares, montobcv, etc.)

@@ -240,8 +240,9 @@
 
 		let montoIngresado = parseFloat($("#" + campoModificado).val()) || 0;
 		window.calculo.monedaOrigen = campoModificado;
-				//console.log(campoModificado + " || " + (parseFloat($("#" + campoModificado).val()) || 0));
+		console.log(window.calculo.montobcv + " || " + window.calculo.montousdt  + " || " + window.calculo.montoeuro);
 		if (campoModificado === "montobcv") {
+			console.log(campoModificado + " || " + (parseFloat($("#" + campoModificado).val()) || 0));
 			window.calculo.montobcv = parseFloat(montoIngresado).toFixed(3);		
 
 			window.calculo.bsbcv = parseFloat(window.calculo.montobcv * tBcv).toFixed(3);
@@ -255,6 +256,7 @@
 			window.calculo.bseuro = parseFloat(window.calculo.montoeuro * tEuro).toFixed(3);
 
 		} else if (campoModificado === "montousdt") {
+			console.log(campoModificado + " || " + (parseFloat($("#" + campoModificado).val()) || 0));
 			window.calculo.montousdt = parseFloat(montoIngresado).toFixed(3);
 
 			window.calculo.bsusdt = parseFloat(window.calculo.montousdt * tUsdt).toFixed(3);
@@ -268,6 +270,7 @@
 			window.calculo.bseuro = parseFloat(window.calculo.montousdt * tEuro).toFixed(3);
 
 		} else if (campoModificado === "montoeuro") {
+			console.log(campoModificado + " || " + (parseFloat($("#" + campoModificado).val()) || 0));
 			window.calculo.montoeuro = parseFloat(montoIngresado).toFixed(3);
 
 			window.calculo.bseuro = parseFloat(window.calculo.montoeuro * tEuro).toFixed(3);
@@ -281,6 +284,7 @@
 			window.calculo.bsusdt = parseFloat(window.calculo.montoeuro * tUsdt).toFixed(3);
 
 		} else if (campoModificado === "bolivares") {
+			console.log(campoModificado + " || " + (parseFloat($("#" + campoModificado).val()) || 0));
 			window.calculo.bsbcv = parseFloat(montoIngresado).toFixed(3);
 			window.calculo.bsusdt = parseFloat(montoIngresado).toFixed(3);
 			window.calculo.bseuro = parseFloat(montoIngresado).toFixed(3);
@@ -295,6 +299,11 @@
     // Desactivamos temporalmente para evitar bucles cruzados infinitos
 		$('#montobcv, #montousdt, #montoeuro','#bolivares').off('input.calculadora');
 
+	if (!campoModificado) {
+		window.calculo.montobcv = parseFloat(window.tasasCargadas.bcv.promedio/window.tasasCargadas.bcv.promedio).toFixed(4);
+		window.calculo.montousdt = parseFloat(window.tasasCargadas.bcv.promedio/window.tasasCargadas.usdt.promedio).toFixed(4);
+		window.calculo.montoeuro = parseFloat(window.tasasCargadas.bcv.promedio/window.tasasCargadas.euro.promedio).toFixed(4);
+		}else{
 		if (campoModificado === "montousdt") {
 			$('#montobcv').val(window.calculo.montobcv > 0 ? window.calculo.montobcv : '');
 			$('#montousdt').val(window.calculo.montousdt > 0 ? window.calculo.montousdt : '');
@@ -317,19 +326,15 @@
 			$("#bolivares").val((window.calculo.montobcv * tBcv).toFixed(3));
 		}
 		if (campoModificado === "bolivares") {
-			console.log(campoModificado+" pasa por aqui")
 			$('#montobcv').val(window.calculo.montobcv > 0 ? window.calculo.montobcv : '');
 			$('#montousdt').val(window.calculo.montousdt > 0 ? window.calculo.montousdt : '');
 			$('#montoeuro').val(window.calculo.montoeuro > 0 ? window.calculo.montoeuro : '');
 		}
+	}
 
 
-		
 		console.table(window.calculo);
 		activarEscuchaInputs();
-//		$("#montobcv").val((window.calculo.montobcv));
-//		$("#montousdt").val((window.calculo.montousdt));
-//		$("#montoeuro").val((window.calculo.montoeuro));
 	}
 
 function activarEscuchaInputs() {
@@ -373,10 +378,12 @@ function activarEscuchaInputs() {
     });
 }
 
+
 	function resetCampoTasas() {
-		$('#montobcv').val(window.tasasCargadas.bcv.promedio);
-		$('#montousdt').val(window.tasasCargadas.usdt.promedio);
-		$('#montoeuro').val(window.tasasCargadas.euro.promedio);
+		$('#bolivares').val(window.tasasCargadas.bcv.promedio);
+		$('#montobcv').val(window.calculo.montobcv);
+		$('#montousdt').val(window.calculo.montousdt);
+		$('#montoeuro').val(window.calculo.montoeuro);
 	}
 	function calculoinicial(){
 		window.calculo.bsbcv= window.tasasCargadas.bcv.promedio;
