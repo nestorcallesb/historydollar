@@ -235,64 +235,45 @@
 		const tBcv = window.tasasCargadas.bcv.promedio || 0;
 		const tUsdt = window.tasasCargadas.usdt.promedio || 0;
 		const tEuro = window.tasasCargadas.euro.promedio || 0;
-				calculoinicial();	//console.log(tBcv+" / "+tUsdt+" / "+tEuro);
+				calculoinicial();
 		if (tBcv === 0 || tUsdt === 0 || tEuro === 0) return;
 
 		let montoIngresado = parseFloat($("#" + campoModificado).val()) || 0;
 		window.calculo.monedaOrigen = campoModificado;
-		console.log(window.calculo.montobcv + " || " + window.calculo.montousdt  + " || " + window.calculo.montoeuro);
 		if (campoModificado === "montobcv") {
-			console.log(campoModificado + " || " + (parseFloat($("#" + campoModificado).val()) || 0));
 			window.calculo.montobcv = parseFloat(montoIngresado).toFixed(3);		
 
 			window.calculo.bsbcv = parseFloat(window.calculo.montobcv * tBcv).toFixed(3);
-
 			window.calculo.montousdt = parseFloat(window.calculo.bsbcv / tUsdt).toFixed(3); 
-
 			window.calculo.montoeuro = parseFloat(window.calculo.bsbcv / tEuro).toFixed(3); 
-
 			window.calculo.bsusdt = parseFloat(window.calculo.montousdt * tUsdt).toFixed(3);
-
 			window.calculo.bseuro = parseFloat(window.calculo.montoeuro * tEuro).toFixed(3);
 
 		} else if (campoModificado === "montousdt") {
-			console.log(campoModificado + " || " + (parseFloat($("#" + campoModificado).val()) || 0));
 			window.calculo.montousdt = parseFloat(montoIngresado).toFixed(3);
 
 			window.calculo.bsusdt = parseFloat(window.calculo.montousdt * tUsdt).toFixed(3);
-
 			window.calculo.montobcv = parseFloat(window.calculo.bsusdt / tBcv).toFixed(3);
-
 			window.calculo.montoeuro = parseFloat(window.calculo.bsusdt / tEuro).toFixed(3);
-
 			window.calculo.bsbcv = parseFloat(window.calculo.montousdt * tBcv).toFixed(3);
-
 			window.calculo.bseuro = parseFloat(window.calculo.montousdt * tEuro).toFixed(3);
 
 		} else if (campoModificado === "montoeuro") {
-			console.log(campoModificado + " || " + (parseFloat($("#" + campoModificado).val()) || 0));
 			window.calculo.montoeuro = parseFloat(montoIngresado).toFixed(3);
 
 			window.calculo.bseuro = parseFloat(window.calculo.montoeuro * tEuro).toFixed(3);
-
 			window.calculo.montobcv = parseFloat(window.calculo.bseuro / tBcv).toFixed(3);
-
 			window.calculo.montousdt = parseFloat(window.calculo.bseuro / tUsdt).toFixed(3);
-
 			window.calculo.bsbcv = parseFloat(window.calculo.bseuro * tBcv).toFixed(3);
-
 			window.calculo.bsusdt = parseFloat(window.calculo.montoeuro * tUsdt).toFixed(3);
 
 		} else if (campoModificado === "bolivares") {
-			console.log(campoModificado + " || " + (parseFloat($("#" + campoModificado).val()) || 0));
 			window.calculo.bsbcv = parseFloat(montoIngresado).toFixed(3);
 			window.calculo.bsusdt = parseFloat(montoIngresado).toFixed(3);
 			window.calculo.bseuro = parseFloat(montoIngresado).toFixed(3);
 
 			window.calculo.montobcv = parseFloat(window.calculo.bseuro / tBcv).toFixed(3);
-
 			window.calculo.montousdt = parseFloat(window.calculo.bseuro / tUsdt).toFixed(3);
-
 			window.calculo.montoeuro = parseFloat(window.calculo.bsusdt / tEuro).toFixed(3);
 		}
 
@@ -332,9 +313,9 @@
 		}
 	}
 
-
 		console.table(window.calculo);
 		activarEscuchaInputs();
+
 	}
 
 function activarEscuchaInputs() {
@@ -348,8 +329,7 @@ function activarEscuchaInputs() {
             return; // Permitimos la acción y salimos
         }
 
-        // 2. Validar si es un número o un punto decimal
-        // Permite dígitos del 0 al 9 y el carácter '.'
+        // 2. Validar si es un número o un punto decimal // Permite dígitos del 0 al 9 y el carácter '.'
         const esNumeroOPunto = /^[0-9.]$/.test(caracterPulsado);
 
         // 3. (Opcional) Evitar que escriban más de un punto decimal en el mismo input
@@ -367,10 +347,8 @@ function activarEscuchaInputs() {
     // Mantenemos el evento 'input' original para calcular las conversiones en tiempo real
     $('#montobcv, #montousdt, #montoeuro, #bolivares').on('input.calculadora', function() {
         const inputId = this.id;
-
         // Cancelamos el cálculo anterior si el usuario sigue escribiendo rápido
         clearTimeout(temporizadorDebounce);
-
         // Programamos el cálculo para 150 milisegundos después de que deje de teclear
         temporizadorDebounce = setTimeout(function() {
             calcularConversiones(inputId);

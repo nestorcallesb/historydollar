@@ -4,16 +4,15 @@ $(document).ready(function() {
 		"searching": false,
 		"lengthChange": false,
 		"paging": false,
-		"pageLength" : 5,   // number of rows to display
+		"pageLength" : 3,   // number of rows to display
 		"order": [
  			[ 0, "asc" ],
  			[ 1, "desc" ],
- 			[ 3, "desc" ]
+ 			[ 2, "desc" ]
  			],
 		"columns": [
 			{ data: "moneda", title: "Moneda" },
 			{ data: "fuente", title: "Fuente" },
-			{ data: "nombre", title: "Nombre" },
 			{ data: "promedio", title: "Tasa" },
 			{ data: "fechaActualizacion", title: "Fecha Actualización" }
  			]
@@ -34,7 +33,7 @@ $(document).ready(function() {
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	//let dollarURL = "https://ve.dolarapi.com/v1/dolares/oficial";
+	/// Calculo dolares/oficial
 	const dolar = leerDollar(window.urls.urlbcv);
 	dolar.then((resultado) => {
 		if (resultado && resultado.fechaActualizacion) {
@@ -47,8 +46,8 @@ $(document).ready(function() {
 	console.error("❌ Hubo un error al obtener los datos:", error);
 	})	
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	let paraleloURL = "https://ve.dolarapi.com/v1/dolares/paralelo";
-	const paralelo = leerDollar(paraleloURL);
+	/// Calculo dolares/paralelo
+	const paralelo = leerDollar(window.urls.urlusdt);
 	paralelo.then((resultado) => {
 		if (resultado && resultado.fechaActualizacion) {
 			resultado.fechaActualizacion = formatearFechaVenezuela(resultado.fechaActualizacion);
@@ -68,7 +67,7 @@ $(document).ready(function() {
 		console.error("❌ Hubo un error al obtener los datos:"+paraleloURL, error);
 	})
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	//let euroURL = "https://ve.dolarapi.com/v1/euros/oficial";
+	/// Calculo euros/oficial
 	const euro = leerDollar(window.urls.urleuro);
 	euro.then((resultado) => {
 		if (resultado && resultado.fechaActualizacion) {
@@ -83,17 +82,13 @@ $(document).ready(function() {
 	})
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 	// Definimos las dos URLs de los históricos
-	const dollarHistoyURL = window.urls.urlhdolar;
-	const euroHistoryURL = window.urls.urlheuro;
 	// 🚀 UNIFICACIÓN ASÍNCRONA: Esperamos por ambas respuestas de internet
 	Promise.all([
-		leerDollar(dollarHistoyURL),
-		leerDollar(euroHistoryURL)
+		leerDollar(window.urls.urlhdolar),
+		leerDollar(window.urls.urlheuro)
 	]).then(([dataDolar, dataEuro]) => {
-    
 	// Creamos un único arreglo vacío donde acumularemos todo
 		let historicoUnificado = [];
-
 	// 1. PROCESAMOS LOS DATOS DE DÓLARES
 		if (dataDolar && Array.isArray(dataDolar)) {
 			dataDolar.forEach((registro) => {
@@ -145,7 +140,6 @@ $(document).ready(function() {
     console.error("❌ Hubo un error crítico al obtener los históricos unificados:", error);
 });
 
-
 //////////////////////////// FASE #2 CALCULADORA DE DOLARES ///////////////////////////////////////
 	// 1. Obtiene el Dólar Oficial de HOY de forma automática
 	Promise.all([
@@ -159,21 +153,18 @@ $(document).ready(function() {
 
 	// 2. Guardamos la tasa BCV si respondió con éxito
 		if (resBcv) {
-			console.log("ultima fecha:"+resBcv.fecha);
 			window.tasasCargadas.bcv.promedio = parseFloat(resBcv.promedio).toFixed(4);
 			window.tasasCargadas.bcv.fecha = (resBcv.fecha);
 		}
 
         // 3. Guardamos la tasa Paralelo si respondió con éxito
 		if (resusdt) {
-			console.log("ultima fecha:"+resusdt.fecha);
 			window.tasasCargadas.usdt.promedio = parseFloat(resusdt.promedio).toFixed(4);
 			window.tasasCargadas.usdt.fecha = (resusdt.fecha);
 		}
 
 	// 4. Guardamos la tasa Euro si respondió con éxito
 		if (resEuro) {
-			console.log("ultima fecha:"+resEuro.fecha);
 			window.tasasCargadas.euro.promedio = parseFloat(resEuro.promedio).toFixed(4);
 			window.tasasCargadas.euro.fecha = (resEuro.fecha);
 		}
@@ -262,6 +253,6 @@ $(document).ready(function() {
 		// Regresa a su estado original después de 1.2 segundos
 		setTimeout(function() {
 			$btn.text(textoPrevio).removeClass('btn-success').addClass('btn-primary');
-		}, 1200);
+		}, 1500);
 	}
 });
